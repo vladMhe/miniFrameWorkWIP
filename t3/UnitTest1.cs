@@ -9,7 +9,6 @@ namespace t3
 {
     public class Tests: DriverHelper
     {
-
         DriverHelper helper = new DriverHelper();
         TicketsPage ticketPage = new TicketsPage();
         EventsPage eventPage = new EventsPage();
