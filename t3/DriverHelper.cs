@@ -27,6 +27,48 @@ namespace t3
             Assert.AreEqual(textString, elementText);
         }
 
-      
+        public bool IsElementDisplayed(By element)
+        {
+            if (Driver.FindElements(element).Count > 0)
+            {
+                if (Driver.FindElement(element).Displayed)
+                    return true;
+                else
+                    return false;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        public bool IsElementEnabled( By element)
+        {
+            if (Driver.FindElements(element).Count > 0)
+            {
+                if (Driver.FindElement(element).Enabled)
+                    return true;
+                else
+                    return false;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        internal void IsElementEnabled(IWebElement existingAdress)
+        {
+            throw new NotImplementedException();
+        }
+
+        
+           
+        
+
+
+
+
     }
 }
