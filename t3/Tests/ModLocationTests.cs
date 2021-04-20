@@ -69,7 +69,7 @@ namespace t3
 
             //Searching for an invalid location also using an invalid input
             locationsPage.SearchingForLocation("~!@@##2");
-            
+            locationsPage.MyLocationButton.Click();
             
         }
 

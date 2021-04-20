@@ -5,6 +5,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using t3.Pages;
 
 namespace t3
 {
@@ -63,8 +64,12 @@ namespace t3
             throw new NotImplementedException();
         }
 
+        public void WaitElement(String xpath)
+        {
+            
 
-        
+        }
+
 
 
 
