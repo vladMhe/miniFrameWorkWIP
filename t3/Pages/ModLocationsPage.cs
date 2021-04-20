@@ -18,6 +18,7 @@ namespace t3.Pages
         IWebElement locationsSearchBar => Driver.FindElement(By.XPath("//input[@type=\"text\"]"));
         IWebElement searchButton => Driver.FindElement(By.XPath("//input[@type=\"text\"]/following-sibling::button"));
         IWebElement existingAdress => Driver.FindElement(By.XPath("//a[contains(@href,'https://modpizza.com/locations/')]"),20);
+        IWebElement myLocationButton => Driver.FindElement(By.XPath("//button[contains(@name, 'My Location')]"));
 
         public IWebElement LocationsCategory { get { return locationsCategory; } }
         public IWebElement LocationsTitle { get { return locationsTitle; } }
@@ -27,6 +28,7 @@ namespace t3.Pages
         public IWebElement LocationsSearchBar { get { return locationsSearchBar; } }
         public IWebElement SearchButton { get { return searchButton; } }
         public IWebElement ExistingAdress { get { return existingAdress; } }
+        public IWebElement MyLocationButton { get { return myLocationButton; } }
 
 
         /*Actions*/
