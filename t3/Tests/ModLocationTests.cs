@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using t3.Pages;
 
 namespace t3
@@ -53,18 +55,21 @@ namespace t3
         [Test, Order(2)]
         public void SearchingLocations()
         {
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+
             //Reaching Locations Page
             locationsPage.LocationsCategorySelect();
             helper.AssertByElementText("LOCATIONS", locationsPage.LocationsTitle);
 
             //Searching for a valid location
             locationsPage.SearchingForLocation("14 palm");
+            IWebElement SearchResult = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath("//a[contains(@href,'https://modpizza.com/locations/')]")));
             Assert.AreEqual(true, locationsPage.ExistingAdress.Displayed);
             locationsPage.LocationsSearchBar.Clear();
 
             //Searching for an invalid location also using an invalid input
             locationsPage.SearchingForLocation("~!@@##2");
-
+            
             
         }
 

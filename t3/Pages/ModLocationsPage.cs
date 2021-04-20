@@ -17,7 +17,7 @@ namespace t3.Pages
         IWebElement checkboxStatusComing => Driver.FindElement(By.Id("search-coming-soon"));
         IWebElement locationsSearchBar => Driver.FindElement(By.XPath("//input[@type=\"text\"]"));
         IWebElement searchButton => Driver.FindElement(By.XPath("//input[@type=\"text\"]/following-sibling::button"));
-        IWebElement existingAdress => Driver.FindElement(By.XPath("//a[contains(@href,'https://modpizza.com/locations/')]"));
+        IWebElement existingAdress => Driver.FindElement(By.XPath("//a[contains(@href,'https://modpizza.com/locations/')]"),20);
 
         public IWebElement LocationsCategory { get { return locationsCategory; } }
         public IWebElement LocationsTitle { get { return locationsTitle; } }

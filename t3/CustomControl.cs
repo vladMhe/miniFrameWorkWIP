@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace t3
 {
-    class CustomControl
+    public static class CustomControl
     {
-
     }
 }
