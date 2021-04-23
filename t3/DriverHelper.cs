@@ -4,6 +4,8 @@ using System.Text;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Support.UI;
 using t3.Pages;
 
@@ -13,12 +15,47 @@ namespace t3
     {
         public static IWebDriver Driver { get; set; }
 
-        //Initialize Chrome Driver (more arguments will be added latar)
-        public void ChromeDriver(String size)
+        /*Initialize browser driver based on passed argument*/
+        public void InitBrowser(String browserName)
         {
-            ChromeOptions options = new ChromeOptions();
-            options.AddArgument(size);
-            Driver = new ChromeDriver(options);
+            switch (browserName)
+            {
+                case "Chrome":
+                    ChromeOptions options = new ChromeOptions();
+                    options.AddArgument("--start-maximized");
+                    Driver = new ChromeDriver(options);
+                    break;
+                case "FireFox":
+                    Driver = new FirefoxDriver();
+                    break;
+                case "IE":
+                    Driver = new InternetExplorerDriver();
+                    break;
+            }
+        }
+
+        /*Navigate to any URL*/
+        public void NavigateTo(String url)
+        {
+            Driver.Navigate().GoToUrl(url);
+        }
+
+        /*Terminates the driver session*/
+        public void EndSession()
+        {
+            Driver.Quit();
+        }
+
+        public void DeleteCookies()
+        {
+            Driver.Manage().Cookies.DeleteAllCookies();
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+        }
+
+        public IWebElement WaitElementXpath(String xpathValue) {
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+            IWebElement SearchResult = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath(xpathValue)));
+            return SearchResult;
         }
 
         //Assert Method based on the text value from a selector/element
@@ -69,10 +106,6 @@ namespace t3
             
 
         }
-
-
-
-
 
     }
 }

@@ -5,11 +5,12 @@ using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using t3;
 using t3.Pages;
 
-namespace t3
+namespace ModPizzaLocation
 {
-    public class ModLocationTests: DriverHelper
+    public class ModLocationTests
     {
 
         DriverHelper helper = new DriverHelper();
@@ -18,22 +19,20 @@ namespace t3
         [SetUp]
         public void Setup()
         {
-            helper.ChromeDriver("--start-maximized");
-            Driver.Manage().Cookies.DeleteAllCookies();
-            Driver.Navigate().GoToUrl("https://modpizza.com/");
-            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            helper.InitBrowser("Chrome");
         }
 
         [TearDown]
         public void TearDown()
         {
-            Driver.Quit();
+            helper.EndSession();
         }
 
         //Verifying All, Open and Coming Soon locations
         [Test, Order(1)]
         public void CheckingStatuses()
         {
+            helper.NavigateTo("https://modpizza.com/");
             //Reaching Locations Page
             locationsPage.LocationsCategorySelect();
             helper.AssertByElementText("LOCATIONS", locationsPage.LocationsTitle);
@@ -55,15 +54,14 @@ namespace t3
         [Test, Order(2)]
         public void SearchingLocations()
         {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-
+            helper.NavigateTo("https://modpizza.com/");
             //Reaching Locations Page
             locationsPage.LocationsCategorySelect();
             helper.AssertByElementText("LOCATIONS", locationsPage.LocationsTitle);
 
             //Searching for a valid location
             locationsPage.SearchingForLocation("14 palm");
-            IWebElement SearchResult = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath("//a[contains(@href,'https://modpizza.com/locations/')]")));
+            helper.WaitElementXpath("//a[contains(@href,'https://modpizza.com/locations/')]");
             Assert.AreEqual(true, locationsPage.ExistingAdress.Displayed);
             locationsPage.LocationsSearchBar.Clear();
 

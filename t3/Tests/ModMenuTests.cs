@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
+using t3;
 using t3.Pages;
 
-namespace t3.Tests
+namespace ModMenuTests
 {
-    class ModMenuTests:DriverHelper
+    class ModMenuTests
     {
         DriverHelper helper = new DriverHelper();
         ModMenuPage menu = new ModMenuPage();
@@ -14,22 +15,20 @@ namespace t3.Tests
         [SetUp]
         public void Setup()
         {
-            helper.ChromeDriver("--start-maximized");
-            Driver.Manage().Cookies.DeleteAllCookies();
-            Driver.Navigate().GoToUrl("https://modpizza.com/");
-            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            helper.InitBrowser("Chrome");
         }
 
         [TearDown]
         public void TearDown()
         {
-            Driver.Quit();
+            helper.EndSession();
         }
 
         //Verifying All, Open and Coming Soon locations
         [Test, Order(1)]
         public void NavigatingThroughMenus()
         {
+            helper.NavigateTo("https://modpizza.com/");
             //Pizza Menu
             menu.MenuCategoryySelect();
             helper.AssertByElementText("INDIVIDUAL, ARTISAN-STYLE PIZZAS, SALADS AND MORE", menu.MenuParagrahp);
