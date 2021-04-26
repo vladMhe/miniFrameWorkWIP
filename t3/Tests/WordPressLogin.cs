@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Text;
 using NUnit.Framework;
 using t3;
@@ -10,7 +11,8 @@ namespace WordPressLogin
     class WordPressLogin
     {
         DriverHelper helper = new DriverHelper();
-        WPLoginPage wpPage = new WPLoginPage();
+        WPLoginPage wpLogin = new WPLoginPage();
+      
 
         [SetUp]
         public void Setup()
@@ -29,9 +31,9 @@ namespace WordPressLogin
         public void InvalidUserNameLogin()
         {
             helper.NavigateTo("https://wordpress.com/");
-            Assert.AreEqual(true, wpPage.WelcomeTitle.Displayed);
-            wpPage.logIn("wpsvcg@gmail.com@", "auto123auto");
-            Assert.AreEqual(true, wpPage.UserNotExistMessage.Displayed);
+            Assert.AreEqual(true, wpLogin.WelcomeTitle.Displayed);
+            wpLogin.logIn("wpsvcg@gmail.com@", "auto123auto");
+            Assert.AreEqual(true, wpLogin.UserNotExistMessage.Displayed);
         }
 
         /*Logging in using an invalid password*/
@@ -39,9 +41,9 @@ namespace WordPressLogin
         public void InvalidPasswordLogin()
         {
             helper.NavigateTo("https://wordpress.com/");
-            Assert.AreEqual(true, wpPage.WelcomeTitle.Displayed);
-            wpPage.logIn("wpsvcg@gmail.com", "auto123aut@");
-            Assert.AreEqual(true, wpPage.WrongPassword.Displayed);
+            Assert.AreEqual(true, wpLogin.WelcomeTitle.Displayed);
+            wpLogin.logIn("wpsvcg@gmail.com", "auto123aut@");
+            Assert.AreEqual(true, wpLogin.WrongPassword.Displayed);
         }
 
         /*Checking field validations*/
@@ -49,23 +51,25 @@ namespace WordPressLogin
         public void EmptyFieldsValidation()
         {
             helper.NavigateTo("https://wordpress.com/");
-            Assert.AreEqual(true, wpPage.WelcomeTitle.Displayed);
-            wpPage.logIn("", "");
-            Assert.AreEqual(true, wpPage.UserEmptyField.Displayed);
-            wpPage.UserField.SendKeys("wpsvcg@gmail.com");
-            wpPage.ContinueButton.Click();
-            wpPage.LoginButton.Click();
-            Assert.AreEqual(true, wpPage.PasswordField.Displayed);
+            Assert.AreEqual(true, wpLogin.WelcomeTitle.Displayed);
+            wpLogin.logIn("", "");
+            Assert.AreEqual(true, wpLogin.UserEmptyField.Displayed);
+            wpLogin.UserField.SendKeys("wpsvcg@gmail.com");
+            wpLogin.ContinueButton.Click();
+            wpLogin.LoginButton.Click();
+            Assert.AreEqual(true, wpLogin.PasswordField.Displayed);
         }
 
         /*Logging in using successfully*/
         [Test]
         public void SuccesfulLogin()
         {
+            var userT = ConfigurationManager.AppSettings["user"];
+            var passwordT = ConfigurationManager.AppSettings["password"];
             helper.NavigateTo("https://wordpress.com/");
-            Assert.AreEqual(true, wpPage.WelcomeTitle.Displayed);
-            wpPage.logIn("wpsvcg@gmail.com", "auto123auto");
-            Assert.AreEqual(true, wpPage.MyHomeTitle.Displayed);
+            Assert.AreEqual(true, wpLogin.WelcomeTitle.Displayed);
+            wpLogin.logIn(userT, passwordT);
+            Assert.AreEqual(true, wpLogin.MyHomeTitle.Displayed);
         }
 
     }
