@@ -46,11 +46,31 @@ namespace t3
             Driver.Quit();
         }
 
-        public void DeleteCookies()
+        /*Browser arguments*/
+        public void BrowserManage()
         {
             Driver.Manage().Cookies.DeleteAllCookies();
-            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
         }
+
+
+        public static Func<IWebDriver, bool> ElementIsVisible(IWebElement element)
+        {
+            return driver =>
+            {
+                try
+                {
+                    return element.Displayed;
+                }
+                catch (Exception)
+                {
+                    // If element is null, stale or if it cannot be located
+                    return false;
+                }
+            };
+        }
+
+
 
         public IWebElement WaitElementXpath(String xpathValue) {
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));

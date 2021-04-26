@@ -19,7 +19,7 @@ namespace ModPizzaLocation
         [SetUp]
         public void Setup()
         {
-            helper.InitBrowser("Chrome");
+            helper.InitBrowser("FireFox");
         }
 
         [TearDown]
