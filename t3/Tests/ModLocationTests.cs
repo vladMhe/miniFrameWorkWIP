@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Text;
 using System.Threading;
 using NUnit.Framework;
@@ -15,6 +16,7 @@ namespace ModPizzaLocation
 
         DriverHelper helper = new DriverHelper();
         ModLocationsPage locationsPage = new ModLocationsPage();
+       
 
         [SetUp]
         public void Setup()
