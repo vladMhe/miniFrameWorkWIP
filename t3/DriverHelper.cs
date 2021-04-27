@@ -86,6 +86,8 @@ namespace t3
 
         }
 
+
+
         public static Func<IWebDriver, bool> ElementIsVisible(IWebElement element)
         {
             return driver =>

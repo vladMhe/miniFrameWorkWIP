@@ -13,6 +13,9 @@ namespace WordPressLogin
         DriverHelper helper = new DriverHelper();
         WPLoginPage wpLogin = new WPLoginPage();
 
+        //Add Path to stored values from the local text file, then the corresponding line
+        String user => helper.ReadSpecificLine(@"D:\t10\t3\TestData\credentials.txt", 1);
+        String password => helper.ReadSpecificLine(@"D:\t10\t3\TestData\credentials.txt", 2);
 
 
         [SetUp]
@@ -36,7 +39,7 @@ namespace WordPressLogin
             Console.WriteLine();
             helper.NavigateTo("https://wordpress.com/");
             Assert.AreEqual(true, wpLogin.WelcomeTitle.Displayed);
-            wpLogin.logIn("wpsvcg@gmail.com@", "auto123auto");
+            wpLogin.logIn("invalid@#@#", "same");
             Assert.AreEqual(true, wpLogin.UserNotExistMessage.Displayed);
         }
 
@@ -46,7 +49,7 @@ namespace WordPressLogin
         {
             helper.NavigateTo("https://wordpress.com/");
             Assert.AreEqual(true, wpLogin.WelcomeTitle.Displayed);
-            wpLogin.logIn("wpsvcg@gmail.com", "auto123aut@");
+            wpLogin.logIn(user, "invalidPass@");
             Assert.AreEqual(true, wpLogin.WrongPassword.Displayed);
         }
 
@@ -58,7 +61,7 @@ namespace WordPressLogin
             Assert.AreEqual(true, wpLogin.WelcomeTitle.Displayed);
             wpLogin.logIn("", "");
             Assert.AreEqual(true, wpLogin.UserEmptyField.Displayed);
-            wpLogin.UserField.SendKeys("wpsvcg@gmail.com");
+            wpLogin.UserField.SendKeys(user);
             wpLogin.ContinueButton.Click();
             wpLogin.LoginButton.Click();
             Assert.AreEqual(true, wpLogin.PasswordField.Displayed);
@@ -68,10 +71,6 @@ namespace WordPressLogin
         [Test]
         public void SuccesfulLogin()
         {
-            //Add Path to stored values from the local text file, then the corresponding line
-            String user = helper.ReadSpecificLine(@"D:\t9\t3\TestData\credentials.txt", 1);
-            String password = helper.ReadSpecificLine(@"D:\t9\t3\TestData\credentials.txt", 2);
-
             helper.NavigateTo("https://wordpress.com/");
             Assert.AreEqual(true, wpLogin.WelcomeTitle.Displayed);
             wpLogin.logIn(user, password);
