@@ -12,13 +12,16 @@ namespace WordPressLogin
     {
         DriverHelper helper = new DriverHelper();
         WPLoginPage wpLogin = new WPLoginPage();
-      
+
+
 
         [SetUp]
         public void Setup()
         {
             helper.InitBrowser("Chrome");
             helper.BrowserManage();
+           
+
         }
         [TearDown]
         public void TearDown()
@@ -30,6 +33,7 @@ namespace WordPressLogin
         [Test]
         public void InvalidUserNameLogin()
         {
+            Console.WriteLine();
             helper.NavigateTo("https://wordpress.com/");
             Assert.AreEqual(true, wpLogin.WelcomeTitle.Displayed);
             wpLogin.logIn("wpsvcg@gmail.com@", "auto123auto");
@@ -64,11 +68,13 @@ namespace WordPressLogin
         [Test]
         public void SuccesfulLogin()
         {
-            var userT = ConfigurationManager.AppSettings["user"];
-            var passwordT = ConfigurationManager.AppSettings["password"];
+            //Add Path to stored values from the local text file, then the corresponding line
+            String user = helper.ReadSpecificLine(@"D:\t9\t3\TestData\credentials.txt", 1);
+            String password = helper.ReadSpecificLine(@"D:\t9\t3\TestData\credentials.txt", 2);
+
             helper.NavigateTo("https://wordpress.com/");
             Assert.AreEqual(true, wpLogin.WelcomeTitle.Displayed);
-            wpLogin.logIn(userT, passwordT);
+            wpLogin.logIn(user, password);
             Assert.AreEqual(true, wpLogin.MyHomeTitle.Displayed);
         }
 

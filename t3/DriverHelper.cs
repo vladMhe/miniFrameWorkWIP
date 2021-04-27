@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -53,6 +54,37 @@ namespace t3
             Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
         }
 
+        /*Read specific lines from a local file*/
+        public string ReadSpecificLine(string filePath, int lineNumber)
+        {
+            string content = null;
+            try
+            {
+                using (StreamReader file = new StreamReader(filePath))
+                {
+                    for (int i = 1; i < lineNumber; i++)
+                    {
+                        file.ReadLine();
+
+                        if (file.EndOfStream)
+                        {
+                            Console.WriteLine($"End of file.  The file only contains {i} lines.");
+                            break;
+                        }
+                    }
+                    content = file.ReadLine();
+                }
+
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine("There was an error reading the file: ");
+                Console.WriteLine(e.Message);
+            }
+
+            return content;
+
+        }
 
         public static Func<IWebDriver, bool> ElementIsVisible(IWebElement element)
         {

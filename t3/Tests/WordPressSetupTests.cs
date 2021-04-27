@@ -17,10 +17,14 @@ namespace WordPressSetup
         [SetUp]
         public void Setup()
         {
+            //Add Path to stored values from the local text file, then the corresponding line
+            String user = helper.ReadSpecificLine(@"D:\t9\t3\TestData\credentials.txt", 1);
+            String password = helper.ReadSpecificLine(@"D:\t9\t3\TestData\credentials.txt", 2);
+           
             helper.InitBrowser("Chrome");
             helper.BrowserManage();
             helper.NavigateTo("https://wordpress.com/");
-            wpLogin.logIn("wpsvcg@gmail.com", "auto123auto");
+            wpLogin.logIn(user, password);
         }
         [TearDown]
         public void TearDown()
