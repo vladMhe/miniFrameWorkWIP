@@ -14,12 +14,14 @@ namespace WordPressSetup
         WPHomePage wpHome = new WPHomePage();
         WPSettingsPage wpSettings = new WPSettingsPage();
 
+        //Add Path to stored values from the local text file, then the corresponding line
+        String user => helper.ReadSpecificLine(@"D:\t10\t3\TestData\credentials.txt", 1);
+        String password => helper.ReadSpecificLine(@"D:\t10\t3\TestData\credentials.txt", 2);
+
         [SetUp]
         public void Setup()
         {
             //Add Path to stored values from the local text file, then the corresponding line
-            String user = helper.ReadSpecificLine(@"D:\t9\t3\TestData\credentials.txt", 1);
-            String password = helper.ReadSpecificLine(@"D:\t9\t3\TestData\credentials.txt", 2);
            
             helper.InitBrowser("Chrome");
             helper.BrowserManage();
