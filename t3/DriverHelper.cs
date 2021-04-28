@@ -86,7 +86,26 @@ namespace t3
 
         }
 
+        /*TRY THIs*/
 
+        public  IWebElement WaitUntilElementExists(By elementLocator, int timeout = 10)
+        {
+            try
+            {
+                var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(timeout));
+                return wait.Until(ExpectedConditions.ElementExists(elementLocator));
+            }
+            catch (NoSuchElementException)
+            {
+                Console.WriteLine("Element with locator: '" + elementLocator + "' was not found in current context page.");
+                throw;
+            }
+        }
+
+        public void WaitElement(IWebElement ceva) { 
+        WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
+            wait.Until(ExpectedConditions.ElementToBeClickable(ceva));
+        }
 
         public static Func<IWebDriver, bool> ElementIsVisible(IWebElement element)
         {
@@ -157,11 +176,7 @@ namespace t3
             throw new NotImplementedException();
         }
 
-        public void WaitElement(String xpath)
-        {
-            
-
-        }
+      
 
     }
 }
