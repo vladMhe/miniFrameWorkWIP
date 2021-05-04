@@ -26,7 +26,6 @@ namespace t3.Pages
         public IWebElement LoginButton { get { return loginButton; } }
         public IWebElement UserNotExistMessage { get { return userNotExistMessage; } }
         public IWebElement UserEmptyField { get { return userEmptyField; } }
-
         public IWebElement WrongPassword { get { return wrongPassword; } }
         public IWebElement MyHomeTitle { get { return myHomeTitle; } }
 

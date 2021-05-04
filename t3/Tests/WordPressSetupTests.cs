@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using t3;
 using t3.Pages;
 
 namespace WordPressSetup 
 { 
-    class WordPressSetupTests
+    class WordPressSetupTests:DriverHelper
     {
         DriverHelper helper = new DriverHelper();
         WPLoginPage wpLogin = new WPLoginPage();
         WPHomePage wpHome = new WPHomePage();
         WPSettingsPage wpSettings = new WPSettingsPage();
+        WebsitePage wpWeb = new WebsitePage();
 
         //Add Path to stored values from the local text file, then the corresponding line
         String user => helper.ReadSpecificLine(@"D:\t10\t3\TestData\credentials.txt", 1);
@@ -27,6 +31,7 @@ namespace WordPressSetup
             helper.BrowserManage();
             helper.NavigateTo("https://wordpress.com/");
             wpLogin.logIn(user, password);
+            wpSettings.AcceptCookieButton.Click();
         }
         [TearDown]
         public void TearDown()
@@ -36,16 +41,28 @@ namespace WordPressSetup
 
         /*Logging in using an invalid userName*/
         [Test]
-        public void InvalidUserNameLogin()
+        public void ChangeSiteBasicSettings()
         {
-
             wpHome.NameYoursiteText.Click();
             wpHome.NameYoursiteButton.Click();
             Assert.AreEqual(true, wpSettings.SettingsTitle.Displayed);
+            wpSettings.SiteNameAndDescription("Site1", "This is a site");
+            wpSettings.SelectLanguageFAux("Africa and Middle East", "Afrikaans");
+            helper.AssertByElementText("Afrikaans", wpSettings.LanguagePickButton);
+            wpSettings.SelectTimeZone("Bucharest");
+            wpSettings.SaveSettingsButton.Click();
+            Assert.AreEqual(true, wpSettings.SaveAlert.Displayed);
 
+            wpHome.MyHome.Click();
+            wpHome.VisiSiteButton.Click();
+            helper.WaitElement(wpWeb.SiteTitle);
+            helper.AssertByElementText("Site1", wpWeb.SiteTitle);
+            helper.AssertByElementText("This is a site", wpWeb.SiteDescription);
         }
 
-        
+
+
+
 
     }
 }
