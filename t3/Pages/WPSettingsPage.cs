@@ -34,22 +34,6 @@ namespace t3.Pages
         public IWebElement TimeZone { get { return timeZone; } }
 
 
-
-
-        public void TitleFieldSelect()
-        {
-            TitleField.Click();
-        }
-        public void TitleFieldSendKeys()
-        {
-            TitleField.SendKeys("12");
-        }
-
-        public void LanguagePickSelect()
-        {
-            LanguagePickButton.Click();
-        }
-
         public void SiteNameAndDescription(String title, String description)
         {
             WaitElement(TitleField);

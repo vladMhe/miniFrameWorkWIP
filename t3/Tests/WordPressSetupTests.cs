@@ -16,6 +16,7 @@ namespace WordPressSetup
         WPLoginPage wpLogin = new WPLoginPage();
         WPHomePage wpHome = new WPHomePage();
         WPSettingsPage wpSettings = new WPSettingsPage();
+        WebsitePage wpWeb = new WebsitePage();
 
         //Add Path to stored values from the local text file, then the corresponding line
         String user => helper.ReadSpecificLine(@"D:\t10\t3\TestData\credentials.txt", 1);
@@ -54,12 +55,12 @@ namespace WordPressSetup
 
             wpHome.MyHome.Click();
             wpHome.VisiSiteButton.Click();
-
-            helper.AssertByElementText("Site1", wpHome.SiteTitle);
-            helper.AssertByElementText("This is a site", wpHome.SiteDescription);
-
-
+            helper.WaitElement(wpWeb.SiteTitle);
+            helper.AssertByElementText("Site1", wpWeb.SiteTitle);
+            helper.AssertByElementText("This is a site", wpWeb.SiteDescription);
         }
+
+
 
 
 
