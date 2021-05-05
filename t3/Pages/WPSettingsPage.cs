@@ -9,6 +9,7 @@ namespace t3.Pages
 {
     class WPSettingsPage:DriverHelper
     {
+        /*Selectors*/
         IWebElement settingsTitle => Driver.FindElement(By.XPath("//h1[contains(text(),'Settings')]"));
         IWebElement titleField => Driver.FindElement(By.XPath("//input[@type=\"text\"]"));
         IWebElement descriptionField => Driver.FindElement(By.XPath("//input[@name=\"blogdescription\"]"));
@@ -18,7 +19,6 @@ namespace t3.Pages
         IWebElement saveAlert => Driver.FindElement(By.XPath("//span[contains(text(), 'Settings saved successfully!')]"));
         IWebElement languageApplyButton => Driver.FindElement(By.XPath("//button[contains(text(), 'Apply Changes')]"));
         IWebElement timeZone => Driver.FindElement(By.XPath("//*[@class=\"form-select\"]"));
-
 
         public IWebElement SettingsTitle { get { return settingsTitle; } }
         public IWebElement TitleField { get { return titleField; } }
@@ -30,7 +30,9 @@ namespace t3.Pages
         public IWebElement SaveAlert { get { return saveAlert; } }
         public IWebElement TimeZone { get { return timeZone; } }
 
+     /*Actions*/
 
+        //Enter Site Name and Description
         public void SiteNameAndDescription(String title, String description)
         {
             WaitElement(TitleField);

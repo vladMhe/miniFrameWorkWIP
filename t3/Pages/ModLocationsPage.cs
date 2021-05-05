@@ -9,7 +9,6 @@ namespace t3.Pages
     class ModLocationsPage: DriverHelper
     {
         /*Selectors*/
-
         IWebElement locationsCategory => Driver.FindElement(By.XPath("//a[@href=\"https://modpizza.com/location/\"]"));
         IWebElement locationsTitle => Driver.FindElement(By.XPath("//*[@class='page-header']/h1"));
         IWebElement checkboxStatusAll => Driver.FindElement(By.Id("search-all"));

@@ -14,7 +14,7 @@ namespace t3.Pages
         public IWebElement EventsTitle { get { return eventsTitle; } }
         public IWebElement EventsParagrahp { get { return eventsParagrahp; } }
 
-        /*Actions*/
+     /*Actions*/
         public void EventsTitleSelect() => EventsTitle.Click();
 
 

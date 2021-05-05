@@ -39,20 +39,23 @@ namespace WordPressSetup
             helper.EndSession();
         }
 
-        /*Logging in using an invalid userName*/
         [Test]
         public void ChangeSiteBasicSettings()
         {
+            //Enter Site Name and Description
             wpHome.NameYoursiteText.Click();
             wpHome.NameYoursiteButton.Click();
             Assert.AreEqual(true, wpSettings.SettingsTitle.Displayed);
+
             wpSettings.SiteNameAndDescription("Site1", "This is a site");
             wpSettings.SelectLanguageFAux("Africa and Middle East", "Afrikaans");
             helper.AssertByElementText("Afrikaans", wpSettings.LanguagePickButton);
+
+            //Configure Time Zone
             wpSettings.SelectTimeZone("Bucharest");
             wpSettings.SaveSettingsButton.Click();
-            Assert.AreEqual(true, wpSettings.SaveAlert.Displayed);
 
+            //Check if new configured settings are reflected on the WebPage
             wpHome.MyHome.Click();
             wpHome.VisiSiteButton.Click();
             helper.WaitElement(wpWeb.SiteTitle);

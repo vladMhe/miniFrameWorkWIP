@@ -9,6 +9,7 @@ namespace t3.Pages
 
     class WPHomePage :DriverHelper
     {
+    /*Selectors*/
         IWebElement nameYoursiteText => Driver.FindElement(By.XPath("//h6[contains(text(), 'Name your site')]"));
         IWebElement nameYoursiteButton => Driver.FindElement(By.XPath("//button[contains(text(), 'Name your site')]"));
         IWebElement updateHomePageButton => Driver.FindElement(By.XPath("//h6[contains(text(), 'Update your Home page')]"));
