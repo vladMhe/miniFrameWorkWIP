@@ -86,48 +86,30 @@ namespace t3
 
         }
 
-        /*TRY THIs*/
-
-        public  IWebElement WaitUntilElementExists(By elementLocator, int timeout = 50)
+        //Waiting for element to be clickable
+        public void WaitElement(IWebElement ceva)
         {
-            try
-            {
-                var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(timeout));
-                return wait.Until(ExpectedConditions.ElementExists(elementLocator));
-            }
-            catch (NoSuchElementException)
-            {
-                Console.WriteLine("Element with locator: '" + elementLocator + "' was not found in current context page.");
-                throw;
-            }
-        }
-
-        public void WaitElement(IWebElement ceva) { 
-        WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
             wait.Until(ExpectedConditions.ElementToBeClickable(ceva));
 
         }
 
-        public Func<IWebDriver, bool> ElementIsVisible(IWebElement element)
-        {
-            return driver =>
-            {
-                try
-                {
-                    return element.Displayed;
-                }
-                catch (Exception)
-                {
-                    // If element is null, stale or if it cannot be located
-                    return false;
-                }
-            };
-        }
+        //public  IWebElement WaitUntilElementExists(By elementLocator, int timeout = 50)
+        //{
+        //    try
+        //    {
+        //        var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(timeout));
+        //        return wait.Until(ExpectedConditions.ElementExists(elementLocator));
+        //    }
+        //    catch (NoSuchElementException)
+        //    {
+        //        Console.WriteLine("Element with locator: '" + elementLocator + "' was not found in current context page.");
+        //        throw;
+        //    }
+        //}
 
 
-
-
-
+        //Waiting for element to exist by XPath - REFACTOR
         public IWebElement WaitElementXpath(String xpathValue) {
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
             IWebElement SearchResult = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath(xpathValue)));
@@ -141,41 +123,6 @@ namespace t3
             Assert.AreEqual(textString, elementText);
         }
 
-        public bool IsElementDisplayed(By element)
-        {
-            if (Driver.FindElements(element).Count > 0)
-            {
-                if (Driver.FindElement(element).Displayed)
-                    return true;
-                else
-                    return false;
-            }
-            else
-            {
-                return false;
-            }
-
-        }
-
-        public bool IsElementEnabled( By element)
-        {
-            if (Driver.FindElements(element).Count > 0)
-            {
-                if (Driver.FindElement(element).Enabled)
-                    return true;
-                else
-                    return false;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        internal void IsElementEnabled(IWebElement existingAdress)
-        {
-            throw new NotImplementedException();
-        }
 
       
 

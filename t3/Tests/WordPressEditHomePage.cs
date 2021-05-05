@@ -25,8 +25,6 @@ namespace WordPressSetup
         [SetUp]
         public void Setup()
         {
-            //Add Path to stored values from the local text file, then the corresponding line
-
             helper.InitBrowser("Chrome");
             helper.BrowserManage();
             helper.NavigateTo("https://wordpress.com/");
@@ -39,7 +37,6 @@ namespace WordPressSetup
             helper.EndSession();
         }
 
-        /*Logging in using an invalid userName*/
         [Test]
         public void InProgressForNow()
         {

@@ -7,6 +7,7 @@ namespace t3.Pages
 {
     class WPLoginPage : DriverHelper
     {
+    /*Selectors*/
         IWebElement acceptCookieButton => Driver.FindElement(By.XPath("//button[contains(text(), 'Got it!')]"));
         IWebElement welcomeTitle => Driver.FindElement(By.XPath("//span[contains(text(), 'Welcome to the world’s most')]"));
         IWebElement logInButtonTitle => Driver.FindElement(By.XPath("//a[@title=\"Log In\"]"));
@@ -32,7 +33,9 @@ namespace t3.Pages
         public IWebElement MyHomeTitle { get { return myHomeTitle; } }
 
 
+    /*Actions*/
 
+        //Login Method
         public void logIn(String userName, String password)
         {
             logInButtonTitle.Click();
