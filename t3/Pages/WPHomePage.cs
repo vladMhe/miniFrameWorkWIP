@@ -15,6 +15,8 @@ namespace t3.Pages
         IWebElement editHomePageButton => Driver.FindElement(By.XPath("//button[contains(text(), 'Edit homepage')]"));
         IWebElement myHome => Driver.FindElement(By.XPath("//*[@data-e2e-sidebar=\"My Home\"]"));
         IWebElement visiSiteButton => Driver.FindElement(By.XPath("//a[contains(text(), 'Visit site')]"));
+        IWebElement editSiteMenuButton => Driver.FindElement(By.XPath("//h6[contains(text(), 'Edit the site menu')]"));
+        IWebElement addMenuButton => Driver.FindElement(By.XPath("//button[contains(text(), 'Add a menu')]"));
 
         public IWebElement NameYoursiteText { get { return nameYoursiteText; } }
         public IWebElement NameYoursiteButton { get { return nameYoursiteButton; } }
@@ -22,6 +24,9 @@ namespace t3.Pages
         public IWebElement EditHomePageButton { get { return editHomePageButton; } }
         public IWebElement MyHome { get { return myHome; } }
         public IWebElement VisiSiteButton { get { return visiSiteButton; } }
+        public IWebElement EditSiteMenuButton { get { return editSiteMenuButton; } }
+        public IWebElement AddMenuButton { get { return addMenuButton; } }
+
 
 
     }
