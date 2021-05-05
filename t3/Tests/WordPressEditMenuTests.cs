@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using t3;
 using t3.Pages;
 
@@ -41,8 +43,13 @@ namespace MenuSetup
         {
             wpHome.EditSiteMenuButton.Click();
             wpHome.AddMenuButton.Click();
+            Thread.Sleep(5000);
+         
             Driver.SwitchTo().Frame(Driver.FindElement(By.CssSelector("iframe[title='Customizer']")));
+
+            helper.WaitElement(wpEditMenu.SiteIdentifyButton);
             Assert.AreEqual(true, wpEditMenu.SiteIdentifyButton.Displayed);
+            helper.WaitElement(wpEditMenu.SiteIdentifyButton);
 
             wpEditMenu.SiteIdentifyButton.Click();
         }

@@ -57,6 +57,7 @@ namespace WordPressSetup
             wpHome.VisiSiteButton.Click();
             helper.WaitElement(wpWeb.SiteTitle);
             helper.AssertByElementText("Site1", wpWeb.SiteTitle);
+            helper.WaitElement(wpWeb.SiteDescription);
             helper.AssertByElementText("This is a site", wpWeb.SiteDescription);
         }
 

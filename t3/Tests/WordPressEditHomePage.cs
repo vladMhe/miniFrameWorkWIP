@@ -41,13 +41,11 @@ namespace WordPressSetup
 
         /*Logging in using an invalid userName*/
         [Test]
-        public void tttt()
+        public void InProgressForNow()
         {
             wpHome.UpdateHomePageButton.Click();
             wpHome.EditHomePageButton.Click();
-            helper.WaitElement(wpEdit.SiteBody);
-            Assert.AreEqual(true, wpEdit.SiteBody.Displayed);
-            Assert.AreEqual(true, wpEdit.TryAgain.Displayed);
+         
 
         }
 

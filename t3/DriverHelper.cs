@@ -103,7 +103,7 @@ namespace t3
         }
 
         public void WaitElement(IWebElement ceva) { 
-        WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+        WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
             wait.Until(ExpectedConditions.ElementToBeClickable(ceva));
 
         }
