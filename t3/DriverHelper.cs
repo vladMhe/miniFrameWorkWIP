@@ -51,7 +51,7 @@ namespace t3
         public void BrowserManage()
         {
             Driver.Manage().Cookies.DeleteAllCookies();
-            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
         }
 
         /*Read specific lines from a local file*/
@@ -88,7 +88,7 @@ namespace t3
 
         /*TRY THIs*/
 
-        public  IWebElement WaitUntilElementExists(By elementLocator, int timeout = 10)
+        public  IWebElement WaitUntilElementExists(By elementLocator, int timeout = 50)
         {
             try
             {
@@ -105,9 +105,10 @@ namespace t3
         public void WaitElement(IWebElement ceva) { 
         WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
             wait.Until(ExpectedConditions.ElementToBeClickable(ceva));
+
         }
 
-        public static Func<IWebDriver, bool> ElementIsVisible(IWebElement element)
+        public Func<IWebDriver, bool> ElementIsVisible(IWebElement element)
         {
             return driver =>
             {

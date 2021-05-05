@@ -12,7 +12,6 @@ namespace t3.Pages
         IWebElement settingsTitle => Driver.FindElement(By.XPath("//h1[contains(text(),'Settings')]"));
         IWebElement titleField => Driver.FindElement(By.XPath("//input[@type=\"text\"]"));
         IWebElement descriptionField => Driver.FindElement(By.XPath("//input[@name=\"blogdescription\"]"));
-        IWebElement acceptCookieButton => Driver.FindElement(By.XPath("//button[contains(text(), 'Got it!')]"));
         IWebElement languagePickButton => Driver.FindElement(By.XPath("//button[contains(@class, 'language-picker')]/div[2]"));
         IWebElement selectLanguageTitle => Driver.FindElement(By.XPath("//div[contains(text(), 'Select a language')]"));
         IWebElement saveSettingsButton => Driver.FindElement(By.XPath("//button[contains(text(), 'Save settings')]"));
@@ -24,10 +23,8 @@ namespace t3.Pages
         public IWebElement SettingsTitle { get { return settingsTitle; } }
         public IWebElement TitleField { get { return titleField; } }
         public IWebElement DescriptionField { get { return descriptionField; } }
-        public IWebElement AcceptCookieButton { get { return acceptCookieButton; } }
         public IWebElement LanguagePickButton { get { return languagePickButton; } }
         public IWebElement LanguageApplyButton { get { return languageApplyButton; } }
-
         public IWebElement SelectLanguageTitle { get { return selectLanguageTitle; } }
         public IWebElement SaveSettingsButton { get { return saveSettingsButton; } }
         public IWebElement SaveAlert { get { return saveAlert; } }
