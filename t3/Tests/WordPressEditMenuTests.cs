@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using AutoItX3Lib;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using t3;
 using t3.Pages;
@@ -39,12 +41,14 @@ namespace MenuSetup
 
         //Configuring Site Menu
         [Test, Order(1)]
-        public void t1()
+        public void UploadCustomLogo()
         {
             wpHome.EditSiteMenuButton.Click();
             wpHome.AddMenuButton.Click();
+            //Needs to be replaced with proper handling
             Thread.Sleep(5000);
-         
+            //Needs to be replaced with proper handling
+
             Driver.SwitchTo().Frame(Driver.FindElement(By.CssSelector("iframe[title='Customizer']")));
 
             helper.WaitElement(wpEditMenu.SiteIdentifyButton);
@@ -52,6 +56,21 @@ namespace MenuSetup
             helper.WaitElement(wpEditMenu.SiteIdentifyButton);
 
             wpEditMenu.SiteIdentifyButton.Click();
+            helper.WaitElement(wpEditMenu.SelectLogoButton);
+            wpEditMenu.SelectLogoButton.Click();
+            wpEditMenu.ChangeToFileTab();
+            wpEditMenu.SelectFilesButton.Click();
+            wpEditMenu.UploadImage(@"D:\t12\t3\TestData\patrik.jpg");
+
+            helper.WaitElement(wpEditMenu.SelectUploadedImageButton);
+            wpEditMenu.SelectUploadedImageButton.Click();
+
+            wpEditMenu.DragImage(0, -150);
+            helper.WaitElement(wpEditMenu.CropImageButton);
+            wpEditMenu.CropImageButton.Click();
+            helper.WaitElement(wpEditMenu.SaveButton);
+            Assert.AreEqual(true, wpEditMenu.SaveButton.Displayed);
+            //An check if image exist then replace method should be added here
         }
     }
 }
