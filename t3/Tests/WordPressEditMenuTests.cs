@@ -45,8 +45,10 @@ namespace MenuSetup
         {
             wpHome.EditSiteMenuButton.Click();
             wpHome.AddMenuButton.Click();
+            //Needs to be replaced with proper handling
             Thread.Sleep(5000);
-         
+            //Needs to be replaced with proper handling
+
             Driver.SwitchTo().Frame(Driver.FindElement(By.CssSelector("iframe[title='Customizer']")));
 
             helper.WaitElement(wpEditMenu.SiteIdentifyButton);
