@@ -19,8 +19,8 @@ namespace WordPressSetup
         WebsitePage wpWeb = new WebsitePage();
 
         //Add Path to stored values from the local text file, then the corresponding line
-        String user => helper.ReadSpecificLine(@"D:\t10\t3\TestData\credentials.txt", 1);
-        String password => helper.ReadSpecificLine(@"D:\t10\t3\TestData\credentials.txt", 2);
+        String user => helper.ReadSpecificLine(@"C:\a1\t3\TestData\credentials.txt", 1);
+        String password => helper.ReadSpecificLine(@"C:\a1\t3\TestData\credentials.txt", 2);
 
         [SetUp]
         public void Setup()
@@ -52,10 +52,12 @@ namespace WordPressSetup
             helper.AssertByElementText("Afrikaans", wpSettings.LanguagePickButton);
 
             //Configure Time Zone
+            helper.ScrollToElement(wpSettings.TimeZone);
             wpSettings.SelectTimeZone("Bucharest");
             wpSettings.SaveSettingsButton.Click();
 
             //Check if new configured settings are reflected on the WebPage
+            helper.ScrollToElement(wpHome.MyHome);
             wpHome.MyHome.Click();
             wpHome.VisiSiteButton.Click();
             helper.WaitElement(wpWeb.SiteTitle);

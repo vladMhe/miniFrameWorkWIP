@@ -14,8 +14,8 @@ namespace WordPressLogin
         WPLoginPage wpLogin = new WPLoginPage();
 
         //Add Path to stored values from the local text file, then the corresponding line
-        String user => helper.ReadSpecificLine(@"D:\t10\t3\TestData\credentials.txt", 1);
-        String password => helper.ReadSpecificLine(@"D:\t10\t3\TestData\credentials.txt", 2);
+        String user => helper.ReadSpecificLine(@"C:\a1\t3\TestData\credentials.txt", 1);
+        String password => helper.ReadSpecificLine(@"C:\a1\t3\TestData\credentials.txt", 2);
 
 
         [SetUp]

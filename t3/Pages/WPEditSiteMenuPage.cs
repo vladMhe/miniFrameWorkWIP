@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
-using AutoItX3Lib;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 
@@ -21,6 +20,7 @@ namespace t3.Pages
         IWebElement customImage => Driver.FindElement(By.XPath("//div[@class=\"imgareaselect-selection\"]"));
         IWebElement customLogo => Driver.FindElement(By.XPath("//a[@class=\"custom-logo-link\"]/img"));
         IWebElement saveButton => Driver.FindElement(By.XPath("//input[@id=\"save\"]"));
+        IWebElement inputFile => Driver.FindElement(By.XPath("//input[starts-with(@id, 'html5_')]"));
         //IWebElement checkImage => Driver.FindElement(By.XPath("//img[contains(@src, '')]"));
 
         public IWebElement SiteIdentifyButton { get { return siteIdentifyButton; } }
@@ -32,6 +32,7 @@ namespace t3.Pages
         public IWebElement CustomImage { get { return customImage; } }
         public IWebElement CustomLogo { get { return customLogo; } }
         public IWebElement SaveButton { get { return saveButton; } }
+        public IWebElement InputFile { get { return inputFile; } }
 
 
         /*Actions*/
@@ -48,17 +49,23 @@ namespace t3.Pages
         }
 
         //Upload an image after opening browser dialog select
-        public void UploadImage(string imageLocation)
-        {
-            AutoItX3 openDialog = new AutoItX3();
-            openDialog.WinActivate("File Upload");
-            Thread.Sleep(2000);
-            openDialog.Send(imageLocation);
-            Thread.Sleep(2000);
-            openDialog.Send("{ENTER}");
-        }
+        //public void UploadImage(string imageLocation)
+        //{
+        //    AutoItX3 openDialog = new AutoItX3();
+        //    openDialog.WinActivate("File Upload");
+        //    Thread.Sleep(2000);
+        //    openDialog.Send(imageLocation);
+        //    Thread.Sleep(2000);
+        //    openDialog.Send("{ENTER}");
+        //}
 
         //Moves image while in Crop Mode //righ offset/up offset
+
+        public void UploadImage()
+        {
+            inputFile.SendKeys(@"C:\a1\t3\TestData\patrik.jpg");
+        }
+
         public void DragImage(int right, int up)
         {
             Actions crop = new Actions(Driver);
