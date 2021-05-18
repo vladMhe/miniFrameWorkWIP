@@ -7,6 +7,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using t3.Pages;
 
@@ -87,11 +88,19 @@ namespace t3
         }
 
         //Waiting for element to be clickable
-        public void WaitElement(IWebElement ceva)
+        public void WaitElement(IWebElement element)
         {
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
-            wait.Until(ExpectedConditions.ElementToBeClickable(ceva));
+            wait.Until(ExpectedConditions.ElementToBeClickable(element));
 
+        }
+
+        //Scroll to Element
+        public void ScrollToElement(IWebElement element)
+        {
+            Actions action = new Actions(Driver);
+            action.MoveToElement(element);
+            action.Perform();
         }
 
         //public  IWebElement WaitUntilElementExists(By elementLocator, int timeout = 50)

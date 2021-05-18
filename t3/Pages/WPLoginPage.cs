@@ -38,6 +38,7 @@ namespace t3.Pages
         //Login Method
         public void logIn(String userName, String password)
         {
+            //conditionals should be added here
             logInButtonTitle.Click();
             UserField.SendKeys(userName);
             ContinueButton.Click();
@@ -47,7 +48,7 @@ namespace t3.Pages
             }
             catch(ElementNotInteractableException)
             {
-                Console.WriteLine("Element not Interactable");
+                Console.WriteLine("UserField Element not Interactable");
             }
             try
             {
@@ -56,6 +57,18 @@ namespace t3.Pages
             catch (NoSuchElementException)
             {
                 Console.WriteLine("No Element is displayed");
+            }
+        }
+        
+        public void AcceptCookie()
+        {
+            try
+            {
+                AcceptCookieButton.Click();
+            }
+            catch (NoSuchElementException)
+            {
+                Console.WriteLine("Cookie button not found");
             }
         }
 

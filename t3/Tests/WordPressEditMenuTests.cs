@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
-using AutoItX3Lib;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
@@ -10,7 +9,7 @@ using OpenQA.Selenium.Support.UI;
 using t3;
 using t3.Pages;
 
-namespace MenuSetup
+namespace WordPressMenuSetup
 {
     class WordPressEditMenuTests:DriverHelper
     {
@@ -20,9 +19,14 @@ namespace MenuSetup
         WPEditSiteMenuPage wpEditMenu = new WPEditSiteMenuPage();
 
         //Add Path to stored values from the local text file, then the corresponding line
-        String user => helper.ReadSpecificLine(@"D:\t10\t3\TestData\credentials.txt", 1);
-        String password => helper.ReadSpecificLine(@"D:\t10\t3\TestData\credentials.txt", 2);
+        String user => helper.ReadSpecificLine(@"C:\a1\t3\TestData\credentials.txt", 1);
+        //current path ? ^ 
+        //Add json
 
+        String password => helper.ReadSpecificLine(@"C:\a1\t3\TestData\credentials.txt", 2);
+        //encode encrypt password ^ - trigger at runtime
+
+        /*Create one Nunit class with setup teardown*/
         [SetUp]
         public void Setup()
         {
@@ -30,7 +34,7 @@ namespace MenuSetup
             helper.BrowserManage();
             helper.NavigateTo("https://wordpress.com/");
             wpLogin.logIn(user, password);
-            wpLogin.AcceptCookieButton.Click();
+            wpLogin.AcceptCookie();
         }
 
         [TearDown]
@@ -43,7 +47,9 @@ namespace MenuSetup
         [Test, Order(1)]
         public void UploadCustomLogo()
         {
+            //create methods for these
             wpHome.EditSiteMenuButton.Click();
+            
             wpHome.AddMenuButton.Click();
             //Needs to be replaced with proper handling
             Thread.Sleep(5000);
@@ -59,12 +65,12 @@ namespace MenuSetup
             helper.WaitElement(wpEditMenu.SelectLogoButton);
             wpEditMenu.SelectLogoButton.Click();
             wpEditMenu.ChangeToFileTab();
-            wpEditMenu.SelectFilesButton.Click();
-            wpEditMenu.UploadImage(@"D:\t12\t3\TestData\patrik.jpg");
+            Assert.AreEqual(true, wpEditMenu.InputFile.Enabled);
+            wpEditMenu.UploadImage();
 
             helper.WaitElement(wpEditMenu.SelectUploadedImageButton);
             wpEditMenu.SelectUploadedImageButton.Click();
-
+       
             wpEditMenu.DragImage(0, -150);
             helper.WaitElement(wpEditMenu.CropImageButton);
             wpEditMenu.CropImageButton.Click();
