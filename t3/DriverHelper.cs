@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -10,6 +11,7 @@ using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using t3.Pages;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace t3
 {
@@ -132,8 +134,14 @@ namespace t3
             Assert.AreEqual(textString, elementText);
         }
 
+        public static string[] MaxTiaaaaa()
+        {
+            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"TestData\credentials.txt");
+            string[] files = File.ReadAllLines(path);
+            return files;
+        }
+       
 
-      
 
     }
 }
