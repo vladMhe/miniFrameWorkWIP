@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading;
 using NUnit.Framework;
@@ -19,11 +20,13 @@ namespace WordPressMenuSetup
         WPEditSiteMenuPage wpEditMenu = new WPEditSiteMenuPage();
 
         //Add Path to stored values from the local text file, then the corresponding line
-        String user => helper.ReadSpecificLine(@"C:\a1\t3\TestData\credentials.txt", 1);
+        String test = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\credentials.txt");
+
+        String user => helper.ReadSpecificLine(test, 1);
         //current path ? ^ 
         //Add json
 
-        String password => helper.ReadSpecificLine(@"C:\a1\t3\TestData\credentials.txt", 2);
+        String password => helper.ReadSpecificLine(test, 2);
         //encode encrypt password ^ - trigger at runtime
 
         /*Create one Nunit class with setup teardown*/

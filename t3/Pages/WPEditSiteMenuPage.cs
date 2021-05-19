@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 
@@ -63,6 +65,8 @@ namespace t3.Pages
 
         public void UploadImage()
         {
+            String test = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\patrik.jpg");
+
             inputFile.SendKeys(@"C:\a1\t3\TestData\patrik.jpg");
         }
 

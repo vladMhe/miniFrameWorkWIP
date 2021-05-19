@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading;
 using NUnit.Framework;
@@ -19,14 +20,15 @@ namespace WordPressSetup
         WebsitePage wpWeb = new WebsitePage();
 
         //Add Path to stored values from the local text file, then the corresponding line
-        String user => helper.ReadSpecificLine(@"C:\a1\t3\TestData\credentials.txt", 1);
-        String password => helper.ReadSpecificLine(@"C:\a1\t3\TestData\credentials.txt", 2);
+        String test = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\credentials.txt");
+        String user => helper.ReadSpecificLine(test, 1);
+        String password => helper.ReadSpecificLine(test, 2);
 
         [SetUp]
         public void Setup()
         {
             //Add Path to stored values from the local text file, then the corresponding line
-           
+
             helper.InitBrowser("Chrome");
             helper.BrowserManage();
             helper.NavigateTo("https://wordpress.com/");

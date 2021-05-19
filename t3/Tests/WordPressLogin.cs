@@ -8,7 +8,7 @@ using t3.Pages;
 
 namespace WordPressLogin 
 { 
-    class WordPressLogin
+    class WordPressLogin:DriverHelper
     {
         DriverHelper helper = new DriverHelper();
         WPLoginPage wpLogin = new WPLoginPage();
